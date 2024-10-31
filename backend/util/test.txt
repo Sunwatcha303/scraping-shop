@@ -1,0 +1,34 @@
+//test /user/signup
+{
+  "email": "mockup@mockup.com",
+  "username": "mockup",
+  "password": "mockup1234",
+  "role": "user"
+}
+//test /user/signin
+{
+  "username": "mockup",
+  "password": "mockup1234",
+  "role": "user"
+}
+//test /cart/payment
+{
+  "username": "mockup1",
+  "shopname": "mockup",
+  "qty": 2,
+  "total": 2000,
+  "products":[
+    {
+      "product_id":1,
+      "product_name":"a",
+      "price":1000,
+      "description":""
+    },
+    {
+      "product_id":2,
+      "product_name":"b",
+      "price":1000,
+      "description":""
+    }
+  ]
+}
