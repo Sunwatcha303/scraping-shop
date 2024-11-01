@@ -1,7 +1,17 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
     const [activeItem, setActiveItem] = useState('home');
+    const navigate = useNavigate(); // Initialize useNavigate
+
+    const handleSignout = () => {
+        // Delete the cookie by setting its expiration date to the past
+        document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;";
+
+        // Redirect to the sign-up page
+        navigate('/signin');
+    };
 
     return (
         <header className="site-header">
@@ -19,8 +29,8 @@ const Header = () => {
                     </li>
                 </ul>
             </nav>
-            <button className="logout-btn">ออกจากระบบ</button>
-            <style jsx>{`
+            <button className="logout-btn" onClick={handleSignout}>ออกจากระบบ</button>
+            <style>{`
             .site-header {
                 background: var(--secondary);
                 width: 100%;

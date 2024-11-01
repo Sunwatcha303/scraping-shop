@@ -1,19 +1,19 @@
 import React from 'react';
 
 function CartItem({ name, shop, description, price }) {
-    return (
-        <article className="cart-item">
-            <div className="item-image"></div>
-            <div className="item-details">
-                <h3 className="item-name">{name}</h3>
-                <p className="item-shop">{shop}</p>
-                <p className="item-description">{description}</p>
-            </div>
-            <div className="item-actions">
-                <p className="item-price">ราคา {price} บาท</p>
-                <button className="remove-btn">ลบ</button>
-            </div>
-            <style jsx>{`
+  return (
+    <article className="cart-item">
+      <div className="item-image"></div>
+      <div className="item-details">
+        <h3 className="item-name">{name}</h3>
+        <p className="item-shop">{shop}</p>
+        <p className="item-description">{description}</p>
+      </div>
+      <div className="item-actions">
+        <p className="item-price">ราคา {price} บาท</p>
+        <button className="remove-btn">ลบ</button>
+      </div>
+      <style >{`
         .cart-item {
           display: flex;
           align-items: center;
@@ -66,8 +66,8 @@ function CartItem({ name, shop, description, price }) {
           }
         }
       `}</style>
-        </article>
-    );
+    </article>
+  );
 }
 
 export default CartItem;

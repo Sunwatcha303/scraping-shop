@@ -1,11 +1,11 @@
 import React from 'react';
 
 const ProfileInfo = () => {
-    return (
-        <section className="profile-info">
-            <div className="profile-avatar"></div>
-            <h2 className="username">@username</h2>
-            <style jsx>{`
+  return (
+    <section className="profile-info">
+      <div className="profile-avatar"></div>
+      <h2 className="username">@username</h2>
+      <style >{`
         .profile-info {
           display: flex;
           align-items: center;
@@ -25,8 +25,8 @@ const ProfileInfo = () => {
           margin-top: 20px;
         }
       `}</style>
-        </section>
-    );
+    </section>
+  );
 };
 
 export default ProfileInfo;

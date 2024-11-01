@@ -1,11 +1,11 @@
 import React from 'react';
 
 const CheckboxField = ({ label }) => {
-    return (
-        <div className="checkbox-field">
-            <input type="checkbox" id="agreeTerms" className="checkbox" />
-            <label htmlFor="agreeTerms" className="label">{label}</label>
-            <style jsx>{`
+  return (
+    <div className="checkbox-field">
+      <input type="checkbox" id="agreeTerms" className="checkbox" />
+      <label htmlFor="agreeTerms" className="label">{label}</label>
+      <style >{`
         .checkbox-field {
           display: flex;
           align-items: center;
@@ -30,8 +30,8 @@ const CheckboxField = ({ label }) => {
           cursor: pointer;
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default CheckboxField;

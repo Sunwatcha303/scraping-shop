@@ -15,7 +15,7 @@ const ProductHistory = () => {
             {productData.map((product) => (
                 <ProductCard key={product.id} {...product} />
             ))}
-            <style jsx>{`
+            <style >{`
         .product-history {
           background-color: var(--temp2);
           padding: 1px 0 24px;

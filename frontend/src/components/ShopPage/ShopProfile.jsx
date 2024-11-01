@@ -1,17 +1,17 @@
 import React from 'react';
 
-const UserProfile = () => {
+const UserProfile = ({shop}) => {
     return (
         <section className="user-profile">
             <div className='cover'></div>
             <div className="profile-container">
                 <div className="avatar"></div>
                 <div className="user-info">
-                    <h2 className="username">@username</h2>
+                    <h2 className="username">@{shop.shop_name}</h2>
                     <button className="message-btn">ส่งข้อความ</button>
                 </div>
             </div>
-            <style jsx>{`
+            <style >{`
         .cover {
             min-height: 238px;
             background-color: #E1D7C6;

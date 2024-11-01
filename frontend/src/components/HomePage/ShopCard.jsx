@@ -5,7 +5,7 @@ const ShopCard = ({ name, description }) => {
         <article className="shop-card">
             <div className="shop-image" aria-hidden="true"></div>
             <div className="shop-info">
-                <h2 className="shop-name">{name}</h2>
+                <h2 className="shop-name">@{name}</h2>
                 <p className="shop-description">{description}</p>
             </div>
             <style>{`

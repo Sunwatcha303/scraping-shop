@@ -14,7 +14,7 @@ const SearchBar = () => {
             <button type="submit" className="search-button">
                 <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/3eafb8201cc5f106f98d4b39a967573048dcf346b9c58347d13c9a1bec65ef2a?placeholderIfAbsent=true&apiKey=995f48d45d994fa1bbe8730e0edd02c1" alt="Search" className="search-icon" />
             </button>
-            <style jsx>{`  
+            <style>{`  
             .search-bar {
                 display: flex;
                 align-items: center;

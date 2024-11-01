@@ -1,29 +1,29 @@
 import React from 'react';
 
 const chatData = [
-    { id: 1, shopName: "@shop's name", lastMessage: "ข้อความล่าสุด", date: "27/10/2567" },
-    { id: 2, shopName: "@shop's name", lastMessage: "ข้อความล่าสุด", date: "27/10/2567" },
-    { id: 3, shopName: "@shop's name", lastMessage: "ข้อความล่าสุด", date: "27/10/2567" },
-    { id: 4, shopName: "@shop's name", lastMessage: "ข้อความล่าสุด", date: "27/10/2567" },
-    { id: 5, shopName: "@shop's name", lastMessage: "ข้อความล่าสุด", date: "27/10/2567" },
+  { id: 1, shopName: "@shop's name", lastMessage: "ข้อความล่าสุด", date: "27/10/2567" },
+  { id: 2, shopName: "@shop's name", lastMessage: "ข้อความล่าสุด", date: "27/10/2567" },
+  { id: 3, shopName: "@shop's name", lastMessage: "ข้อความล่าสุด", date: "27/10/2567" },
+  { id: 4, shopName: "@shop's name", lastMessage: "ข้อความล่าสุด", date: "27/10/2567" },
+  { id: 5, shopName: "@shop's name", lastMessage: "ข้อความล่าสุด", date: "27/10/2567" },
 ];
 
 const ChatList = () => {
-    return (
-        <aside className="chat-list">
-            <ul className="chat-items">
-                {chatData.map((chat) => (
-                    <li key={chat.id} className="chat-item">
-                        <div className="shop-avatar-list" />
-                        <div className="chat-info">
-                            <h3 className="shop-name">{chat.shopName}</h3>
-                            <p className="last-message">{chat.lastMessage}</p>
-                        </div>
-                        <time className="chat-date">{chat.date}</time>
-                    </li>
-                ))}
-            </ul>
-            <style jsx>{`
+  return (
+    <aside className="chat-list">
+      <ul className="chat-items">
+        {chatData.map((chat) => (
+          <li key={chat.id} className="chat-item">
+            <div className="shop-avatar-list" />
+            <div className="chat-info">
+              <h3 className="shop-name">{chat.shopName}</h3>
+              <p className="last-message">{chat.lastMessage}</p>
+            </div>
+            <time className="chat-date">{chat.date}</time>
+          </li>
+        ))}
+      </ul>
+      <style >{`
         .chat-list {
           width: 45%;
           overflow-y: auto;
@@ -74,8 +74,8 @@ const ChatList = () => {
           }
         }
       `}</style>
-        </aside>
-    );
+    </aside>
+  );
 };
 
 export default ChatList;

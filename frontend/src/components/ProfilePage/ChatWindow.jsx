@@ -15,7 +15,7 @@ const ChatWindow = () => {
   ];
   const handleSubmit = (event) => {
     event.preventDefault();
-    
+
   };
 
   return (
@@ -35,7 +35,7 @@ const ChatWindow = () => {
           <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/acf2b5fd57ed97ef68fc2778c1fce7e5a5cd0eeedb9bc4b505c42d7fd8f227d1?placeholderIfAbsent=true&apiKey=995f48d45d994fa1bbe8730e0edd02c1" alt="Send message" className="send-icon" />
         </button>
       </form>
-      <style jsx>{`
+      <style >{`
         .chat-window {
           width: 59%;
           display: flex;

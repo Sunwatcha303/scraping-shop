@@ -1,19 +1,19 @@
 import React from 'react';
 
 const ProductCard = ({ name, description, price }) => {
-    return (
-        <article className="product-card">
-            <div className="product-image"></div>
-            <div className="product-info">
-                <h3 className="product-name">{name}</h3>
-                <p className="product-description">{description}</p>
-                <p className="product-price">{price}</p>
-            </div>
-            <div className="product-actions">
-                <button className="buy-btn">สั่งซื้อเลย</button>
-                <button className="add-to-cart-btn">เพิ่มใส่ตะกร้า</button>
-            </div>
-            <style jsx>{`
+  return (
+    <article className="product-card">
+      <div className="product-image"></div>
+      <div className="product-info">
+        <h3 className="product-name">{name}</h3>
+        <p className="product-description">{description}</p>
+        <p className="product-price">{price}</p>
+      </div>
+      <div className="product-actions">
+        <button className="buy-btn">สั่งซื้อเลย</button>
+        <button className="add-to-cart-btn">เพิ่มใส่ตะกร้า</button>
+      </div>
+      <style >{`
         .product-card {
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           display: flex;
@@ -76,8 +76,8 @@ const ProductCard = ({ name, description, price }) => {
           }
         }
       `}</style>
-        </article>
-    );
+    </article>
+  );
 };
 
 export default ProductCard;

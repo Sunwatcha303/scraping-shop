@@ -1,17 +1,17 @@
 import React from 'react';
 
-const TabSet = ({setDisplayAdmin}) => {
-    return (
-        <nav className="tab-set">
-            <ul className="tab-list">
-                <li className="tab-item">
-                    <a className="tab-link" onClick={() => setDisplayAdmin(false)}>ผู้ใช้</a>
-                </li>
-                <li className="tab-item">
-                    <a className="tab-link" onClick={() => setDisplayAdmin(true)}>แอดมิน</a>
-                </li>
-            </ul>
-            <style jsx>{`
+const TabSet = ({ setDisplayAdmin }) => {
+  return (
+    <nav className="tab-set">
+      <ul className="tab-list">
+        <li className="tab-item">
+          <a className="tab-link" onClick={() => setDisplayAdmin(false)}>ผู้ใช้</a>
+        </li>
+        <li className="tab-item">
+          <a className="tab-link" onClick={() => setDisplayAdmin(true)}>แอดมิน</a>
+        </li>
+      </ul>
+      <style>{`
         .tab-list {
           display: flex;
           list-style-type: none;
@@ -41,8 +41,8 @@ const TabSet = ({setDisplayAdmin}) => {
           }
         }
       `}</style>
-        </nav>
-    );
+    </nav>
+  );
 };
 
 export default TabSet;

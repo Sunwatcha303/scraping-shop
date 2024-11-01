@@ -12,7 +12,7 @@ const HomePage = () => {
                 <SearchBar />
                 <ShopGrid />
             </main>
-            <style jsx>{`
+            <style>{`
             .home-page {
                 display: flex;
                 flex-direction: column;

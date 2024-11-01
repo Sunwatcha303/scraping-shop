@@ -15,7 +15,7 @@ function CartSummary() {
       </div>
       <hr className="summary-divider" />
       <button className="create-qr-btn">สร้าง qr code</button>
-      <style jsx>{`
+      <style >{`
         .cart-summary {
           border-radius: 16px;
           background: #e1d7c6;

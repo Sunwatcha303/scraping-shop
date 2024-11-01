@@ -1,29 +1,31 @@
 import React from 'react';
 
-const Button = ({ children, primary }) => {
-  return (
-    <button className={`button ${primary ? 'primary' : ''}`}>
-      {children}
-      <style >{`
-        .button {
+const Button = ({ text, primary }) => {
+    return (
+        <button className={`btn ${primary ? 'btn-primary' : ''}`}>
+            {text}
+            <style >{`
+        .btn {
+          align-self: stretch;
           border-radius: 8px;
+          min-height: 42px;
           font-weight: 700;
           padding: 11px 16px;
-          cursor: pointer;
           border: none;
+          cursor: pointer;
         }
-        .primary {
+        .btn-primary {
           background-color: var(--primary, #295f98);
           color: #fff;
         }
         @media (max-width: 991px) {
-          .button {
+          .btn {
             white-space: normal;
           }
         }
       `}</style>
-    </button>
-  );
+        </button>
+    );
 };
 
 export default Button;

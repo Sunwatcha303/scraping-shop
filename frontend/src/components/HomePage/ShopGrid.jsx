@@ -1,28 +1,36 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ShopCard from './ShopCard';
 
-const shopData = [
-    { id: 1, name: '@shop name', description: 'คำอธิบายร้านค้า' },
-    { id: 2, name: '@shop name', description: 'คำอธิบายร้านค้า' },
-    { id: 3, name: '@shop name', description: 'คำอธิบายร้านค้า' },
-    { id: 4, name: '@shop name', description: 'คำอธิบายร้านค้า' },
-    { id: 5, name: '@shop name', description: 'คำอธิบายร้านค้า' },
-    { id: 6, name: '@shop name', description: 'คำอธิบายร้านค้า' },
-    { id: 7, name: '@shop name', description: 'คำอธิบายร้านค้า' },
-    { id: 8, name: '@shop name', description: 'คำอธิบายร้านค้า' },
-];
 
 const ShopGrid = () => {
+    const [shopData, setShopData] = useState([])
+
+    useEffect(() => {
+        const fetchShopData = async () => {
+            try {
+                const response = await fetch('http://localhost:8080/shop/all'); // Replace with your API endpoint
+                if (!response.ok) throw new Error('Network response was not ok');
+
+                const data = await response.json();
+                // console.log(data)
+                setShopData(data);
+            } catch (error) {
+                console.error('Error fetching shop data:', error);
+            }
+        };
+
+        fetchShopData();
+    }, []);
     return (
         <section className="shop-grid">
             <div className="grid-container">
                 {shopData.map((shop) => (
-                    <a href='/shop'>
-                        <ShopCard key={shop.id} name={shop.name} description={shop.description} />
+                    <a key={shop.id} href={`/shop/?shop_name=${shop.shop_name}`}>
+                        <ShopCard name={shop.shop_name} description={shop.description} />
                     </a>
                 ))}
             </div>
-            <style jsx>{`
+            <style>{`
             
             .shop-grid {
                 background: var(--secondary);

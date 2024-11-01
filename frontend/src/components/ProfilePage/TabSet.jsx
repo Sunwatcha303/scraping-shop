@@ -1,17 +1,17 @@
 import React from 'react';
 
-const TabSet = ({setDisplayChat}) => {
-    return (
-        <nav className="tab-set">
-            <ul className="tab-list">
-                <li className="tab-item">
-                    <a className="tab-link" onClick={() => setDisplayChat(false)}>ประวัติการซื้อ</a>
-                </li>
-                <li className="tab-item">
-                    <a className="tab-link" onClick={() => setDisplayChat(true)}>แชท</a>
-                </li>
-            </ul>
-            <style jsx>{`
+const TabSet = ({ setDisplayChat }) => {
+  return (
+    <nav className="tab-set">
+      <ul className="tab-list">
+        <li className="tab-item">
+          <a className="tab-link" onClick={() => setDisplayChat(false)}>ประวัติการซื้อ</a>
+        </li>
+        <li className="tab-item">
+          <a className="tab-link" onClick={() => setDisplayChat(true)}>แชท</a>
+        </li>
+      </ul>
+      <style >{`
         .tab-list {
           display: flex;
           list-style-type: none;
@@ -41,8 +41,8 @@ const TabSet = ({setDisplayChat}) => {
           }
         }
       `}</style>
-        </nav>
-    );
+    </nav>
+  );
 };
 
 export default TabSet;

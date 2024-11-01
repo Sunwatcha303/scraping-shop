@@ -1,16 +1,16 @@
 import React from 'react';
 
 const ProductCard = ({ name, shop, price }) => {
-    return (
-        <article className="product-card">
-            <div className="product-image"></div>
-            <div className="product-info">
-                <h3 className="product-name">{name}</h3>
-                <p className="shop-name">{shop}</p>
-                <p className="product-price">{price}</p>
-            </div>
-            <button className="download-btn">ดาวน์โหลด</button>
-            <style jsx>{`
+  return (
+    <article className="product-card">
+      <div className="product-image"></div>
+      <div className="product-info">
+        <h3 className="product-name">{name}</h3>
+        <p className="shop-name">{shop}</p>
+        <p className="product-price">{price}</p>
+      </div>
+      <button className="download-btn">ดาวน์โหลด</button>
+      <style >{`
         .product-card {
           background-color: var(--white);
           box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -56,8 +56,8 @@ const ProductCard = ({ name, shop, price }) => {
           }
         }
       `}</style>
-        </article>
-    );
+    </article>
+  );
 };
 
 export default ProductCard;

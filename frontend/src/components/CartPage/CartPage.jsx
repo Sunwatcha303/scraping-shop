@@ -5,16 +5,16 @@ import CartSummary from './CartSummary.jsx';
 import ShopGrid from '../HomePage/ShopGrid';
 
 function CartPage() {
-    return (
-        <div className="cart-page">
-            <main className="cart-content">
-                <div className="cart-layout">
-                    <CartList />
-                    <CartSummary />
-                </div>
-                <ShopGrid />
-            </main>
-            <style jsx>{`
+  return (
+    <div className="cart-page">
+      <main className="cart-content">
+        <div className="cart-layout">
+          <CartList />
+          <CartSummary />
+        </div>
+        <ShopGrid />
+      </main>
+      <style >{`
         .cart-page {
           background-color: #fff;
           display: flex;
@@ -48,8 +48,8 @@ function CartPage() {
           }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 }
 
 export default CartPage;

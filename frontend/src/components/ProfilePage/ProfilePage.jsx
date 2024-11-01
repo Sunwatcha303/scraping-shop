@@ -6,26 +6,26 @@ import ChatList from './ChatList';
 import ChatWindow from './ChatWindow';
 
 const ProfilePage = () => {
-    const [displayChat, setDisplayChat] = useState(false);
-    const handleTabSet = (b) => {
-        setDisplayChat(b)
-    }
-    return (
-        <div className="profile-page">
-            <main className="main-content">
-                <ProfileInfo />
-                <div className='main-container'>
-                    <TabSet setDisplayChat={handleTabSet} />
-                    {displayChat ? (
-                        <div className="chat-container">
-                            <ChatList />
-                            <ChatWindow />
-                        </div>
-                    ) : (<ProductHistory />)
-                    }
-                </div>
-            </main>
-            <style jsx>{`
+  const [displayChat, setDisplayChat] = useState(false);
+  const handleTabSet = (b) => {
+    setDisplayChat(b)
+  }
+  return (
+    <div className="profile-page">
+      <main className="main-content">
+        <ProfileInfo />
+        <div className='main-container'>
+          <TabSet setDisplayChat={handleTabSet} />
+          {displayChat ? (
+            <div className="chat-container">
+              <ChatList />
+              <ChatWindow />
+            </div>
+          ) : (<ProductHistory />)
+          }
+        </div>
+      </main>
+      <style >{`
         .main-container{
             padding: 0px 142px;
         }
@@ -52,8 +52,8 @@ const ProfilePage = () => {
           margin: 0;
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default ProfilePage;

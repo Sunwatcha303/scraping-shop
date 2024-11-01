@@ -1,36 +1,92 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import TabSet from './TabSet';
-import FormField from './FromField';
+import FormField from './FormField';
 import CheckboxField from './CheckboxField';
 import Button from './Button';
 
 const SignUpPage = () => {
-    const formFields = [
-        { label: 'Email', placeholder: 'Enter email.' },
-        { label: 'Username', placeholder: 'Enter username.' },
-        { label: 'Password', placeholder: 'Enter password.' },
-        { label: 'Confirm Password', placeholder: 'Enter confirm password.' },
-    ];
+  const [displayAdmin, setDisplayAdmin] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [role, setRole] = useState('user');
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
 
-    const [displayAdmin, setDisplayAdmin] = useState(false);
+  const handleSignUp = async (e) => {
+    e.preventDefault();
 
-    return (
-        <main className="sign-up-personal">
-            <section className="sign-up-container">
-                <h1 className="sign-up-title">Sign-up</h1>
-                <TabSet setDisplayAdmin={setDisplayAdmin}/>
-                <form className="sign-up-form">
-                    {formFields.map((field, index) => (
-                        <FormField key={index} label={field.label} placeholder={field.placeholder} />
-                    ))}
-                    <CheckboxField label="I agree to the term." />
-                </form>
-                <div className="action-container">
-                    <Button primary>Sign-up</Button>
-                    <a href="#" className="sign-in-link">sign-in</a>
-                </div>
-            </section>
-            <style jsx>{`
+    // Check if the passwords match before proceeding
+    if (password !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    // Prepare the data to be sent
+    const data = {
+      email,
+      username,
+      password,
+      role,
+    };
+    // console.log(data)
+    try {
+      const response = await fetch('http://localhost:8080/user/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      // Check if the response is ok (status in the range 200-299)
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Sign-up failed');
+      }
+
+      // Handle successful sign-up (e.g., redirect to home)
+      const responseData = await response.json();
+      // console.log('Sign-up successful:', responseData);
+      document.cookie = `token=${responseData.token}; path=/; max-age=3600;`; // expires in 1 hour
+      alert('Sign-up successful! Redirecting to home...');
+
+      // Redirect to home page
+      navigate('/');
+
+    } catch (error) {
+      // Handle any errors
+      console.error('Error during sign-up:', error);
+      alert('Sign-up failed: ' + error.message);
+    }
+  };
+
+  const formFields = [
+    { label: 'Email', placeholder: 'Enter email.', value: email, setValue: setEmail },
+    { label: 'Username', placeholder: 'Enter username.', value: username, setValue: setUsername },
+    { label: 'Password', placeholder: 'Enter password.', value: password, setValue: setPassword },
+    { label: 'Confirm Password', placeholder: 'Enter confirm password.', value: confirmPassword, setValue: setConfirmPassword },
+  ];
+
+  return (
+    <main className="sign-up-personal">
+      <section className="sign-up-container">
+        <h1 className="sign-up-title">Sign-up</h1>
+        <TabSet setDisplayAdmin={setDisplayAdmin} />
+        <form className="sign-up-form" onSubmit={handleSignUp}>
+          {formFields.map((field, index) => (
+            <FormField key={index} label={field.label} placeholder={field.placeholder} value={field.value} setValue={field.setValue} />
+          ))}
+          {/* <CheckboxField label="I agree to the terms." checked={agreeToTerms} setChecked={setAgreeToTerms} /> */}
+          <div className="action-container">
+            <Button primary type="submit">Sign-up</Button>
+            <a href="/signin" className="sign-in-link">Sign-in</a>
+          </div>
+        </form>
+      </section>
+      <style>{`
         .sign-up-personal {
           border: 1px solid #000;
           background-color: var(--secondary, #cdc2a5);
@@ -87,8 +143,8 @@ const SignUpPage = () => {
           }
         }
       `}</style>
-        </main>
-    );
+    </main>
+  );
 };
 
 export default SignUpPage;

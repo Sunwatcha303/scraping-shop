@@ -1,11 +1,18 @@
 import React from 'react';
 
-const FormField = ({ label, placeholder }) => {
-    return (
-        <div className="form-field">
-            <label className="label">{label}</label>
-            <input type="text" className="input" placeholder={placeholder} aria-label={label} />
-            <style jsx>{`
+const FormField = ({ label, placeholder, value, setValue }) => {
+  return (
+    <div className="form-field">
+      <label className="label">{label}</label>
+      <input
+        type="text"
+        className="input"
+        placeholder={placeholder}
+        aria-label={label}
+        value={value}
+        onChange={(e) => setValue(e.target.value)} // Fixed arrow function syntax
+      />
+      <style>{`
         .form-field {
           display: flex;
           width: 100%;
@@ -34,8 +41,8 @@ const FormField = ({ label, placeholder }) => {
           }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default FormField;
