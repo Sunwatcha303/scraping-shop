@@ -2,6 +2,7 @@ package users
 
 import (
 	"backend/util"
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -23,11 +24,13 @@ func (controller *Controller) SignUp(c *gin.Context) {
 	var signUpReq SignUpRequest
 	if err := c.ShouldBindJSON(&signUpReq); err != nil {
 		// If binding fails, respond with a 400 Bad Request
+		fmt.Print(err.Error())
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	if user, _ := controller.repositoreis.FindUserByUsername(signUpReq.Username); user != nil {
+		fmt.Print("exist username")
 		c.JSON(http.StatusBadRequest, gin.H{"error": "exist username"})
 		return
 	}

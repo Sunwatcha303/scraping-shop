@@ -3,6 +3,7 @@ package shops
 import "time"
 
 type ShopResponse struct {
+	ID          uint   `json:"id"`
 	Image       string `json:"image"`       // Assuming image is a URL or file path as a string
 	ShopName    string `json:"shop_name"`   // Name of the shop
 	Description string `json:"description"` // Description of the shop

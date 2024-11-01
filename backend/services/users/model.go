@@ -12,9 +12,9 @@ type SignUpRequest struct {
 }
 
 type SignInRequest struct {
-	Role     string `json:"role" binding:"required"`
 	Username string `json:"username" binding:"required"`       // Username is required
 	Password string `json:"password" binding:"required,min=6"` // Password is required and must be at least 6 characters
+	Role     string `json:"role" binding:"required"`
 }
 
 type User struct {

@@ -20,6 +20,7 @@ func (repo *Repositories) GetAllShop() (*[]ShopResponse, error) {
 	var shopResponses []ShopResponse
 	for _, shop := range shopsList {
 		shopResponses = append(shopResponses, ShopResponse{
+			ID:          shop.ID,
 			ShopName:    shop.ShopName,
 			Description: shop.Description,
 			Image:       shop.Image,
