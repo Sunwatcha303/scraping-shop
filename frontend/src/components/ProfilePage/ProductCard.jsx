@@ -1,16 +1,52 @@
 import React from 'react';
 
-const ProductCard = ({ name, shop, price }) => {
+const ProductCard = ({ history_id, product_name, shop_name, price }) => {
+  const handleDownload = async () => {
+    try {
+      // Fetch the product data from the server
+      const response = await fetch(`http://localhost:8080/product/${history_id}`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch the product data');
+      }
+
+      // Parse the JSON response
+      const productData = await response.json();
+      const { data } = productData; // Extract the data field
+      console.log(data);
+
+      // Add a BOM for UTF-8
+      const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+      const csvData = new Blob([bom, data], { type: 'text/csv;charset=utf-8;' });
+      const url = window.URL.createObjectURL(csvData); // Create a URL for the blob
+
+      // Create an anchor element for the download
+      const downloadLink = document.createElement('a');
+      downloadLink.href = url; // Set the URL as the href
+      downloadLink.download = `${product_name}.csv`; // Specify the filename
+      document.body.appendChild(downloadLink); // Append to the body
+      downloadLink.click(); // Trigger the download
+
+      // Clean up
+      document.body.removeChild(downloadLink);
+      window.URL.revokeObjectURL(url); // Release the blob URL
+    } catch (error) {
+      console.error('Error downloading CSV:', error);
+      // Optionally handle error (e.g., show an alert)
+    }
+  };
+
   return (
     <article className="product-card">
       <div className="product-image"></div>
       <div className="product-info">
-        <h3 className="product-name">{name}</h3>
-        <p className="shop-name">{shop}</p>
+        <h3 className="product-name">{product_name}</h3>
+        <p className="shop-name">@{shop_name}</p>
         <p className="product-price">{price}</p>
       </div>
-      <button className="download-btn">ดาวน์โหลด</button>
-      <style >{`
+      <button className="download-btn" onClick={handleDownload}>
+        ดาวน์โหลด
+      </button>
+      <style>{`
         .product-card {
           background-color: var(--white);
           box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);

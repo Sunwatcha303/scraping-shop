@@ -1,10 +1,10 @@
 import React from 'react';
 
-const ProfileInfo = () => {
+const ProfileInfo = ({username}) => {
   return (
     <section className="profile-info">
       <div className="profile-avatar"></div>
-      <h2 className="username">@username</h2>
+      <h2 className="username">@{username}</h2>
       <style >{`
         .profile-info {
           display: flex;

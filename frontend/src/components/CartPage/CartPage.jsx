@@ -1,20 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../util/Header';
 import CartList from './CartList';
 import CartSummary from './CartSummary.jsx';
 import ShopGrid from '../HomePage/ShopGrid';
 
 function CartPage() {
+  const [qty, setQty] = useState(0);
+  const [total, setTotal] = useState(0.0);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const getCartItemsFromCookies = () => {
+      const decodedCookies = decodeURIComponent(document.cookie);
+      const cookiesArray = decodedCookies.split(';');
+      const productItems = [];
+
+      cookiesArray.forEach(cookie => {
+        const [name, value] = cookie.trim().split('=');
+
+        // Filter for cookies that start with 'product_'
+        if (name.startsWith('product_')) {
+          try {
+            const product = JSON.parse(value);
+            // console.log(product)
+            productItems.push(product);
+          } catch (error) {
+            console.error("Failed to parse cookie", error);
+          }
+        }
+      });
+
+      setItems(productItems);
+
+      // Calculate quantity and total price
+      const totalQuantity = productItems.length;
+      const totalPrice = productItems.reduce((sum, item) => sum + item.price, 0);
+      setQty(totalQuantity);
+      setTotal(totalPrice);
+    };
+
+    getCartItemsFromCookies();
+  }, []);
+
   return (
     <div className="cart-page">
       <main className="cart-content">
         <div className="cart-layout">
-          <CartList />
-          <CartSummary />
+          <CartList cartItems={items} />
+          <CartSummary qty={qty} total={total} items={items}/>
         </div>
         <ShopGrid />
       </main>
-      <style >{`
+      <style>{`
         .cart-page {
           background-color: #fff;
           display: flex;

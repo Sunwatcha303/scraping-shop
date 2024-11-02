@@ -13,9 +13,12 @@ const Header = () => {
         navigate('/signin');
     };
 
+    const handleClickLogo = () => {
+        navigate('/')
+    }
     return (
         <header className="site-header">
-            <h1 className="logo">scraping shop</h1>
+            <h1 className="logo" onClick={handleClickLogo}>scraping shop</h1>
             <nav className="main-nav">
                 <ul className="nav-list">
                     <li className="nav-item">
@@ -45,6 +48,7 @@ const Header = () => {
                 color: var(--white);
                 font: 400 36px Baumans, sans-serif;
                 margin: 0;
+                cursor: pointer;
             }
 
             .main-nav {

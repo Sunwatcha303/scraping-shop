@@ -33,7 +33,7 @@ const ProductList = ({products}) => {
     <section className="product-list">
       {products.map((product, index) => (
         <React.Fragment key={product.product_id}>
-          <ProductCard name={product.product_name} price={product.price} description={product.description} />
+          <ProductCard product={product} />
         </React.Fragment>
       ))}
       <style>{`

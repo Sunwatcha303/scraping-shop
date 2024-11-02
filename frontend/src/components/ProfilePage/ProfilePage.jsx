@@ -1,19 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ProfileInfo from './ProfileInfo';
 import TabSet from './TabSet';
 import ProductHistory from './ProductHistory';
 import ChatList from './ChatList';
 import ChatWindow from './ChatWindow';
-
+import { decodeToken } from '../util/util';
+import Cookies from 'js-cookie'
 const ProfilePage = () => {
   const [displayChat, setDisplayChat] = useState(false);
+  const [username, setUsername] = useState(() => {
+    const token = Cookies.get('token')
+    const decoded = decodeToken(token)
+    return decoded.username
+  }
+  )
+  const [productData, setProductData] = useState([])
+
+  useEffect(() => {
+    const fetchProductData = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/history/${username}`); // Replace with your actual API URL
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        console.log(data)
+        setProductData(data === null ? [] : data); // Update state with fetched data
+      } catch (error) {
+        console.error('Error fetching product data:', error);
+      }
+    };
+
+    fetchProductData(); // Call the function to fetch data
+  }, []); // Empty dependency array means this effect runs once on mount
+
   const handleTabSet = (b) => {
     setDisplayChat(b)
   }
+
+
+
   return (
     <div className="profile-page">
       <main className="main-content">
-        <ProfileInfo />
+        <ProfileInfo username={username} />
         <div className='main-container'>
           <TabSet setDisplayChat={handleTabSet} />
           {displayChat ? (
@@ -21,7 +51,7 @@ const ProfilePage = () => {
               <ChatList />
               <ChatWindow />
             </div>
-          ) : (<ProductHistory />)
+          ) : (<ProductHistory productData={productData}/>)
           }
         </div>
       </main>

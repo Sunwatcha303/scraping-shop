@@ -1,17 +1,23 @@
 import React from 'react';
 
-function CartItem({ name, shop, description, price }) {
+function CartItem({ product_id, product_name, shop_name, description, price }) {
+
+  const handleDelete = () => {
+    document.cookie = `product_${product_id}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/`;
+    alert("Product removed from cart!");
+    window.location.reload();
+  }
   return (
     <article className="cart-item">
       <div className="item-image"></div>
       <div className="item-details">
-        <h3 className="item-name">{name}</h3>
-        <p className="item-shop">{shop}</p>
+        <h3 className="item-name">{product_name}</h3>
+        <p className="item-shop">@{shop_name}</p>
         <p className="item-description">{description}</p>
       </div>
       <div className="item-actions">
         <p className="item-price">ราคา {price} บาท</p>
-        <button className="remove-btn">ลบ</button>
+        <button className="remove-btn" onClick={handleDelete}>ลบ</button>
       </div>
       <style >{`
         .cart-item {

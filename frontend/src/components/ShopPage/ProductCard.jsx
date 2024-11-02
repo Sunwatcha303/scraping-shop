@@ -1,19 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useNavigate, useSearchParams} from 'react-router-dom';
+import { getCookie } from '../util/util';
 
-const ProductCard = ({ name, description, price }) => {
+const ProductCard = ({ product }) => {
+  const [added, setAdded] = useState(false);
+  const cookieName = `product_${product.product_id}`;
+  const navigate = useNavigate();
+  const [searchParam] = useSearchParams()
+  const shop_name = searchParam.get('shop_name');
+
+  useEffect(() => {
+    if (getCookie(cookieName) !== null) {
+      setAdded(true);
+    }
+  }, [cookieName]);
+
+  const handleAddItemToCart = (e) => {
+    e.preventDefault();
+
+    if (!added) {
+      const productData = JSON.stringify({
+        shop_name: shop_name,
+        product_id: product.product_id,
+        product_name: product.product_name,
+        price: product.price,
+        description: product.description,
+      });
+
+      const expires = new Date();
+      expires.setDate(expires.getDate() + 7);
+
+      document.cookie = `${cookieName}=${encodeURIComponent(productData)};expires=${expires.toUTCString()};path=/`;
+      setAdded(true);
+      alert("Product added to cart!");
+    } else {
+      navigate('/cart');
+    }
+  };
+
   return (
     <article className="product-card">
       <div className="product-image"></div>
       <div className="product-info">
-        <h3 className="product-name">{name}</h3>
-        <p className="product-description">{description}</p>
-        <p className="product-price">{price}</p>
+        <h3 className="product-name">{product.product_name}</h3>
+        <p className="product-description">{product.description}</p>
+        <p className="product-price">{product.price}</p>
       </div>
       <div className="product-actions">
-        <button className="buy-btn">สั่งซื้อเลย</button>
-        <button className="add-to-cart-btn">เพิ่มใส่ตะกร้า</button>
+        <button className="add-to-cart-btn" onClick={handleAddItemToCart}>
+          {added ? 'ดูในตะกร้า' : 'เพิ่มใส่ตะกร้า'}
+        </button>
       </div>
-      <style >{`
+      <style>{`
         .product-card {
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
           display: flex;
