@@ -6,6 +6,7 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type Controller struct {
@@ -74,9 +75,17 @@ func (controller *Controller) SignIn(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
+
 	user, err := controller.repositoreis.FindUserByUsername(signInReq.Username)
 	if err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "User not found"})
+		return
+	}
+
+	// Compare the provided password with the hashed password
+	if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(signInReq.Password)); err != nil {
+		// If the password does not match, respond with a 401 Unauthorized
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Incorrect password"})
 		return
 	}
 

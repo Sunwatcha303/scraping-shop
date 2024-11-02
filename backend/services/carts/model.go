@@ -1,22 +1,26 @@
 package carts
 
 import (
-	"backend/services/shops"
 	"time"
 )
 
 type PaymentRequest struct {
-	Username string          `json:"username"`
-	ShopName string          `json:"shopname"`
-	Qty      uint            `json:"qty"`
-	Total    float32         `json:"total"`
-	Products []shops.Product `json:"products"`
+	Username string  `json:"username"`
+	Qty      uint    `json:"qty"`
+	Total    float32 `json:"total"`
+	Items    []Item  `json:"items"`
 }
 
+type Item struct {
+	ShopName    string  `json:"shop_name"`
+	ID          uint    `json:"product_id"`
+	ProductName string  `json:"product_name"`
+	Price       float32 `json:"price"`
+	Description string  `json:"description"`
+}
 type Transaction struct {
 	ID        uint `gorm:"primaryKey"` // Primary key
 	Username  string
-	ShopName  string
 	Qty       uint
 	Total     float32
 	CreatedAt time.Time // You can add this if you want to track creation time
@@ -26,6 +30,7 @@ type Transaction struct {
 type History struct {
 	ID             uint `gorm:"primaryKey"` // Primary key
 	Transaction_ID uint
+	ShopName       string
 	Product_ID     uint
 }
 

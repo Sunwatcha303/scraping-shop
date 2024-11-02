@@ -27,13 +27,8 @@ func (controller *Controller) Payment(c *gin.Context) {
 		return
 	}
 	fmt.Print(paymentReq)
-	if _, err := controller.repositoreis.GetUserByUsername(paymentReq.ShopName); err != nil {
+	if _, err := controller.repositoreis.GetUserByUsername(paymentReq.Username); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "user not exist"})
-		return
-	}
-
-	if _, err := controller.repositoreis.GetShopByShopName(paymentReq.ShopName); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "shop not exist"})
 		return
 	}
 

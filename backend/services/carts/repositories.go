@@ -40,7 +40,6 @@ func (repo *Repositories) CreateTransaction(paymentReq *PaymentRequest) error {
 
 	transaction := Transaction{
 		Username: paymentReq.Username,
-		ShopName: paymentReq.ShopName,
 		Qty:      paymentReq.Qty,
 		Total:    paymentReq.Total,
 	}
@@ -51,10 +50,11 @@ func (repo *Repositories) CreateTransaction(paymentReq *PaymentRequest) error {
 
 	// Prepare history records for each product in the payment request
 	var histories []History
-	for _, product := range paymentReq.Products {
+	for _, item := range paymentReq.Items {
 		histories = append(histories, History{
 			Transaction_ID: transaction.ID, // Reference the transaction ID
-			Product_ID:     product.ID,     // Link to each product by ID
+			ShopName:       item.ShopName,
+			Product_ID:     item.ID, // Link to each product by ID
 		})
 	}
 

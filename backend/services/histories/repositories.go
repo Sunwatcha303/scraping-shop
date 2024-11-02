@@ -27,7 +27,7 @@ func (repo *Repositories) GetHistoriesByUsername(username string) (*[]HistoryRes
 
 	// Query to join history, transactions, and products
 	if err := repo.db.Table("history AS h"). // Added alias 'AS h' for the history table
-							Select("h.id, p.product_name, t.shop_name, p.price").
+							Select("h.id, p.product_name, h.shop_name, p.price").
 							Joins("JOIN transactions t ON h.transaction_id = t.id").
 							Joins("JOIN products p ON h.product_id = p.id").
 							Where("t.username = ?", username).

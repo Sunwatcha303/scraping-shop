@@ -5,6 +5,7 @@ import (
 
 	"backend/services/carts"
 	"backend/services/histories"
+	"backend/services/products"
 	"backend/services/shops"
 	"backend/services/users"
 	"backend/util"
@@ -31,6 +32,7 @@ func main() {
 		shops.InitRoute(router, db)
 		carts.InitRoute(router, db)
 		histories.InitRoute(router, db)
+		products.InitRoute(router, db)
 	}
 
 	// Run the server
